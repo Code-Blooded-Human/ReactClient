@@ -1,0 +1,6 @@
+export const USER_TOKEN='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFiaGlzaGVrc0BpaXRiaGlsYWkuYWMuaW4iLCJpZCI6IjYyM2YwZTM1ZTY2ZWZhNzNlODIwNjA4ZiIsIm5hbWUiOiJBYmhpc2hlayIsImlhdCI6MTY0ODM2MjgwOX0.YtWsGtyZEusHlTMS6ai5CEAMoMQINDWoBqVV3gnAVtE'
+
+
+export const API_SERVER='http://10.3.0.112:3000'
+export const RTC_SERVER='ws://10.3.0.112:4444'
+export const FRONTEND_SERVER='http://10.3.0.112:3001'
