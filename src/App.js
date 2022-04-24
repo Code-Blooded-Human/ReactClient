@@ -12,6 +12,7 @@ import {
   useRecoilState,
   useRecoilValue,
 } from "recoil";
+import ShowVersions from "./home/ShowVersions";
 
 export default function App() {
   const [navbarVisible, setNavbarVisible] = useState("hidden");
@@ -21,9 +22,11 @@ export default function App() {
         <Navbar />
         <Routes>
           <Route path="/" element={<Home />}></Route>
+
           <Route path="/document/:name" element={<Document />}></Route>
           <Route path="/document/:name/:label" element={<Document />}></Route>
           <Route path="/login" element={<Login />}></Route>
+          <Route path="/:name" element={<ShowVersions />}></Route>
         </Routes>
       </Router>
     </RecoilRoot>
