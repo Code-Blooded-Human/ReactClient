@@ -1,10 +1,10 @@
 import * as React from "react";
 import Navbar from "./componets/Navbar";
 import { Link, Routes, Route, BrowserRouter as Router } from "react-router-dom";
-import { useState } from "react";
 import Home from "./home/Home.js";
 import Document from "./document/Document";
 import Login from "./login/Login";
+import Register from "./register/register";
 import {
   RecoilRoot,
   atom,
@@ -26,6 +26,7 @@ export default function App() {
           <Route path="/document/:name" element={<Document />}></Route>
           <Route path="/document/:name/:label" element={<Document />}></Route>
           <Route path="/login" element={<Login />}></Route>
+          <Route path="/register" element={<Register />}></Route>
           <Route path="/:name" element={<ShowVersions />}></Route>
         </Routes>
       </Router>
