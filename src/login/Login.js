@@ -22,10 +22,9 @@ import axios from 'axios';
 
 export async function loginAPI(email, password){
     const res = await axios.post(API_SERVER+'/api/auth/login',{email, password})
-    console.log({res:res});
+    console.log(res);
     if(res.data.status == "SUCCESS"){
-      window.location.href = "/";
-      return res.data.token;
+       return res.data.token;
     }else{
        return undefined;
     }
@@ -38,7 +37,7 @@ const theme = createTheme();
 export default function Login() {
 
     const [token, setToken] = useRecoilState(tokenState);
-    const handleSubmit = (event) => {
+  const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
 
