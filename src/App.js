@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { useState } from "react";
 import Navbar from "./componets/Navbar";
 import { Link, Routes, Route, BrowserRouter as Router } from "react-router-dom";
 import Home from "./home/Home.js";
