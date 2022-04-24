@@ -4,6 +4,7 @@ import { Link, Routes, Route, BrowserRouter as Router } from 'react-router-dom';
 import Home from './home/Home.js';
 import Document from './document/Document';
 import Login from './login/Login';
+import Register from './register/register';
 import {
   RecoilRoot,
   atom,
@@ -12,6 +13,7 @@ import {
   useRecoilValue,
 } from 'recoil';
 import ShowVersions from './home/ShowVersions';
+
 
 
 
@@ -29,6 +31,7 @@ export default function App() {
           <Route path="/document/:name" element={<Document />}></Route>
           <Route path="/document/:name/:label" element={<Document />}></Route>
           <Route path="/login" element={<Login />}></Route>
+          <Route path="/register" element={<Register />}></Route>
           <Route path="/:name" element={<ShowVersions />}></Route>
         </Routes>
       </Router>
