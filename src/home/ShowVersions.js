@@ -9,19 +9,19 @@ import Grid from '@mui/material/Grid';
 import { styled } from '@mui/material/styles';
 import Paper from '@mui/material/Paper';
 import Box from '@mui/material/Box';
+import {useParams} from 'react-router-dom'
 
 
 
-
-function Home() {
-  
+function ShowVersions() {
+    const { name } = useParams();
   const token = useRecoilValue(tokenState);
   const [docs, setDocs] = useState([])
 
   async function getDocs(){
-    const d = await axios.get(API_SERVER+"/api/document",{headers: {'Authorization': `Bearer ${token}`}})
+    const d = await axios.get(API_SERVER+"/api/document/"+name,{headers: {'Authorization': `Bearer ${token}`}})
     console.log(d);
-    setDocs(d.data.docs);
+    setDocs(d.data.doc.content);
   }
 
   useEffect(() => {
@@ -49,11 +49,15 @@ function Home() {
     <Box sx={{ width: '100%', margin:'30px' }}>
       <Grid container rowSpacing={3} columnSpacing={3}>
         {docs.map(function(doc, index){
-                    return <DocIcon name={doc.name} to={"/document/"+doc.name} versions={"/"+doc.name+"/"}/>
+                    if(doc.label && doc.label != "No Label"){
+                        console.log(doc.label)
+                        return <DocIcon name={doc.label} to={"/document/"+name+"/"+doc.label} />
+                    }
+                   
                   })}
       </Grid>
     </Box>
   )
 }
 
-export default Home
+export default ShowVersions

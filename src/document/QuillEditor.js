@@ -14,6 +14,9 @@ import { RTC_SERVER } from "../const";
 import { useRecoilValue } from "recoil";
 import { tokenState } from "../recoilState";
 import QuillCursors from 'quill-cursors';
+import Button from '@mui/material/Button';
+import TextField from '@mui/material/TextField';
+import CommentBox from "./CommentBox";
 
 let ydoc = null;
 const QuillEditor = (props) => {
@@ -92,15 +95,20 @@ const QuillEditor = (props) => {
   }
 
   return (
+    <>
     <div>
-        <input type="text" placeholder="Enter Version name" value={input} onInput={e => setInput(e.target.value)}></input>
-        <button onClick={save}>Save</button>
+        {/* <input type="text" placeholder="Enter Version name" value={input} onInput={e => setInput(e.target.value)}></input>
+        <button onClick={save}>Save</button> */}
         <ReactQuill 
           ref={(el) => { reactQuillRef = el }}
           theme={'snow'} 
           modules={modules}
                     formats={formats} />
       </div>
+      <div style={{position:'fixed', bottom:0, width:'100%', textAlign:'right'}}>
+        <div><CommentBox /><TextField id="outlined-basic" label="Version Name" variant="outlined" size="small" style={{margin:'10px'}}  value={input} onChange={e => setInput(e.target.value)} /> <Button style={{margin:'10px'} } onClick={save} variant="outlined">Save</Button></div>
+      </div>
+    </>
   )
 }
 
