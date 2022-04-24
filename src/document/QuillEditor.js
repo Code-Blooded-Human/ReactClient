@@ -59,6 +59,8 @@ const QuillEditor = (props) => {
     const ydocument = ydoc.getText('quill');
     
 
+    
+
     getDocument(props.name, props.label ,token).then(d=>{
       console.log(d);
       let updateVector = decodeU8Int(d.data.content);

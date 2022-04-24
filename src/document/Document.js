@@ -9,7 +9,7 @@ function Document(props) {
 const { name, label } = useParams();
 console.log({label});
 const [doc, setDoc] = useState({data:{}});
-const [docPassword, setDocPassword] = useState();
+const [docPassword, setDocPassword] = useState('');
 
 const token = useRecoilValue(tokenState);
 
@@ -30,12 +30,12 @@ async function fetchPassword(name){
 
 useEffect(() => {
     getDocument(name, label ,token).then((d)=>{console.log(d); setDoc(d)});
-    fetchPassword(name).then(password =>{setDocPassword(password); console.log({password})})
+    fetchPassword(name).then(password =>{setDocPassword(password)})
 }, []);
 
   return (
     <>
-     {docPassword && <QuillEditor name={name} label={label} password={docPassword}/>}
+      <QuillEditor name={name} label={label}/>
     </>
   )
 }
