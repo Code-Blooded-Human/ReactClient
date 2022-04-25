@@ -5,6 +5,10 @@ import Home from "./home/Home.js";
 import Document from "./document/Document";
 import Login from "./login/Login";
 import Register from "./register/register";
+import Product from "./containers/Product";
+import About from "./containers/About";
+import Support from "./containers/Support";
+import Pricing from "./containers/Pricing";
 import {
   RecoilRoot,
   atom,
@@ -15,18 +19,26 @@ import {
 import ShowVersions from "./home/ShowVersions";
 
 export default function App() {
-  const [navbarVisible, setNavbarVisible] = useState("hidden");
+  const [navbarType, setNavbarType] = useState(false); // 0 for homepage, 1 for document page
   return (
     <RecoilRoot>
       <Router>
-        <Navbar />
+        <Navbar navbarType={navbarType} />
         <Routes>
-          <Route path="/" element={<Home />}></Route>
-
+          <Route
+            path="/"
+            element={
+              <Home navbarType={navbarType} setNavbarType={setNavbarType} />
+            }
+          ></Route>
           <Route path="/document/:name" element={<Document />}></Route>
           <Route path="/document/:name/:label" element={<Document />}></Route>
           <Route path="/login" element={<Login />}></Route>
           <Route path="/register" element={<Register />}></Route>
+          <Route path="/product" element={<Product />}></Route>
+          <Route path="/about" element={<About />}></Route>
+          <Route path="/support" element={<Support />}></Route>
+          <Route path="/pricing" element={<Pricing />}></Route>
           <Route path="/:name" element={<ShowVersions />}></Route>
         </Routes>
       </Router>
