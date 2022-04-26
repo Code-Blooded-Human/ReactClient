@@ -6,7 +6,6 @@ import { tokenState } from "../recoilState";
 import { Link } from "react-router-dom";
 import DocIcon from "./DocIcon";
 import Grid from "@mui/material/Grid";
-import { styled } from "@mui/material/styles";
 import Paper from "@mui/material/Paper";
 import CardMedia from "@mui/material/CardMedia";
 import Box from "@mui/material/Box";
@@ -16,6 +15,7 @@ import Avatar from "@mui/material/Avatar";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 import CardHeader from "@mui/material/CardHeader";
+import Footer from "../componets/Footer";
 
 function Home({ navbarType, setNavbarType }) {
   const token = useRecoilValue(tokenState);
@@ -31,10 +31,15 @@ function Home({ navbarType, setNavbarType }) {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then((res) => {
+        console.log(res);
         setDocs(res.data.docs);
-        const rvds = res.data.recentlyVisitedDocs;
-        setRecentlyVisitedDocs(() => [...rvds]);
+        let rvds = [];
+        if (res.data.recentlyVisitedDocs) {
+          rvds = res.data.recentlyVisitedDocs;
+        }
+        setRecentlyVisitedDocs(rvds);
         setLoadingState(false);
+        setNavbarType(1);
       })
       .catch(() => {
         setLoadingState(false);
@@ -89,14 +94,10 @@ function Home({ navbarType, setNavbarType }) {
                     <Button variant="outlined" oncl>
                       Get Started
                     </Button>
-
-                    <div className="d-flex justify-content-center mt-5">
-                      <img
-                        src={require("../assets/iit_logo.png")}
-                        height="150"
-                      />
-                    </div>
                   </Link>
+                  <div className="d-flex justify-content-center mt-5">
+                    <img src={require("../assets/iit_logo.png")} height="150" />
+                  </div>
                 </div>
               </Grid>
               <Grid item xs={12} sm={6} md={6}>
@@ -207,11 +208,12 @@ function Home({ navbarType, setNavbarType }) {
               </Grid>
             </Grid>
           </div>
+          <Footer />
         </>
       )}
       {!loadingState && !errorState && (
         <Box sx={{ width: "100%", margin: "30px" }}>
-          <h1>Recent Documents</h1>
+          {recentlyVisitedDocs.length > 0 && <h3>Recent Documents</h3>}
           <Grid container rowSpacing={3} columnSpacing={3}>
             {recentlyVisitedDocs.map(function (name, index) {
               return (
@@ -223,9 +225,12 @@ function Home({ navbarType, setNavbarType }) {
               );
             })}
           </Grid>
-          <div>
-            <hr />
-          </div>
+          {recentlyVisitedDocs.length > 0 && (
+            <div>
+              <hr />
+            </div>
+          )}
+          {docs.length > 0 && <h3>All Documents</h3>}
           <Grid container rowSpacing={3} columnSpacing={3}>
             {docs.map(function (doc, index) {
               return (
