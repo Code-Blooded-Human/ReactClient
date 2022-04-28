@@ -38,7 +38,7 @@ const theme = createTheme();
 export default function Login() {
 
     const [token, setToken] = useRecoilState(tokenState);
-    const [passwordForStoring, setpasswordForStoring] = useRecoilState(passswordState);
+    const [passwordForStoring, setpasswordForStoring] = useRecoilState(passwordState);
 
     const handleSubmit = (event) => {
     event.preventDefault();
