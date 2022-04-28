@@ -9,3 +9,9 @@ export const tokenState = atom({
     default:undefined,
     effects_UNSTABLE:[persistAtom]
   });
+
+  export const passwordState = atom({
+    key: 'passwordState', // unique ID (with respect to other atoms/selectors)
+    default:undefined,
+    effects_UNSTABLE:[persistAtom]
+  });

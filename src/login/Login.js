@@ -13,7 +13,7 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { API_SERVER } from '../const';
-import { tokenState } from '../recoilState';
+import { tokenState, passwordState } from '../recoilState';
 import { useRecoilState } from 'recoil';
 import axios from 'axios';
 
@@ -38,6 +38,8 @@ const theme = createTheme();
 export default function Login() {
 
     const [token, setToken] = useRecoilState(tokenState);
+    const [passwordForStoring, setpasswordForStoring] = useRecoilState(passswordState);
+
     const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -56,6 +58,7 @@ export default function Login() {
             alert("Invalid username passoword");
         }else{
             setToken(t);
+            setpasswordForStoring(password);
         }
     })
 

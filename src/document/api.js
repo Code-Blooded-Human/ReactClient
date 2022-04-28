@@ -1,5 +1,6 @@
 import axios from "axios";
 import { API_SERVER, USER_TOKEN } from "../const";
+const sha1 = require('js-sha1');  
 
 
 export async function getDocument(name, label, token){
@@ -28,9 +29,22 @@ export async function updateDocument(name, content,label, token){
    }
 }
 
+export async function verifyPassword(name, passwordShaB62, token){
+   const res = await axios.post(API_SERVER+'/api/document/verifyPassword',{name, passwordShaB62}, {headers: {'Authorization': `Bearer ${token}`}} )
+   console.log(res);
+   if(res.data.status == "SUCCESS"){
+      return true;
+   }else{
+      return false;
+   }
+}
 
-export async function createDocument(name, token){
-   const res = await axios.post(API_SERVER+'/api/document/create',{name:name}, {headers: {'Authorization': `Bearer ${token}`}} )
+
+
+export async function createDocument(name, token, password){
+
+   let hashedPassword = sha1(password)
+   const res = await axios.post(API_SERVER+'/api/document/create',{name:name, passwordShaB62:hashedPassword}, {headers: {'Authorization': `Bearer ${token}`}} )
    console.log(res);
    if(res.data.status == "SUCCESS"){
       return true;

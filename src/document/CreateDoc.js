@@ -13,6 +13,9 @@ import { tokenState } from '../recoilState';
 export default function CreateDoc(props) {
   const [open, setOpen] = React.useState(false);
   const [name, setName] = React.useState('');
+  const [password, setPassword] = React.useState('');
+
+
   const token = useRecoilValue(tokenState);
 
   const handleClickOpen = () => {
@@ -20,7 +23,7 @@ export default function CreateDoc(props) {
   };
 
   const handleClose = () => {
-    createDocument(name,token);
+    createDocument(name,token, password);
     setOpen(false);
   };
 
@@ -45,6 +48,16 @@ export default function CreateDoc(props) {
             variant="standard"
             value={name}
             onInput={e => setName(e.target.value)}
+          />
+          <TextField
+            autoFocus
+            margin="dense"
+            id="name"
+            label="Document Password"
+            fullWidth
+            variant="standard"
+            value={password}
+            onInput={e => setPassword(e.target.value)}
           />
         </DialogContent>
         <DialogActions>
